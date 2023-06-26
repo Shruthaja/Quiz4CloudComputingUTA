@@ -117,16 +117,25 @@ def page23():
 
 @app.route('/page3.html', methods=['GET', 'POST'])
 def page3():
-    value = ""
-    key = ""
-    d = {}
+    xvalues=[]
+    yvalues=[]
+    color=[]
     if request.method == "POST":
-        s = request.form['string']
-        for i in set(s):
-            d[i] = 0
-        for i in s:
-            d[i] = d[i] + 1
-    return render_template("page3.html", v=list(d.values()), k=list(d.keys()))
+        x = request.form['xvalues']
+        y=request.form['yvalues']
+        z=request.form['zvalues']
+        for i in x.split():
+            xvalues.append(i)
+        for i in y.split():
+            yvalues.append(i)
+        for i in z.split():
+            if(i=="1"):
+                color.append('rgb(0,255,0)')
+            elif(i=="2"):
+                color.append('rgb(0,0,0)')
+            elif(i=="3"):
+                color.append('rgb(255,0,0)')
+    return render_template("page3.html", xvalues=xvalues, yvalues=yvalues,color=color)
 
 
 if __name__ == '__main__':

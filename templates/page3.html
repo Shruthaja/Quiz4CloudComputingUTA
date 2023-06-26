@@ -26,62 +26,37 @@
 <div style="margin-top:3%;">
 
     <form action="/page3.html" method="post">
-        <input type="text" placeholder="Enter String" name="string">
+        <input type="text" placeholder="Enter x values" name="xvalues">
+        <input type="text" placeholder="enter y values" name="yvalues">
+        <input type="text" placeholder="Enter Z values" name="zvalues">
         <input type="submit">
     </form>
 </div>
+
+</div>
+
+
+
 <div style="margin-top:3%;" id="myDiv">
-</div>
-<div style="margin-top:3%;" id="myDiv1">
-</div>
-<div style="margin-top:3%;" id="myDiv4">
 </div>
 <script>
 
-
-var data=[
- {
-    y: {{k|safe}},
-     transforms: [{
-    type: 'sort',
-    target: 'x',
-    order: 'ascending'
-  }],
-    x: {{v}},
-    type: 'histogram',
-    orientation:'h',
-  }
-];
-
-Plotly.newPlot('myDiv4', data);
-
 var data = [
   {
-    y: {{k|safe}},
-     transforms: [{
-    type: 'sort',
-    target: 'x',
-    order: 'ascending'
-  }],
-    x: {{v}},
-    type: 'bar',
-    orientation:'h',
+
+    x:{{xvalues|safe}} ,
+    y:{{yvalues|safe}},
+    mode:'markers',
+    marker:{
+    color:{{color|safe}}
+    },
+    type: 'scatter',
   }
 ];
-
-Plotly.newPlot('myDiv', data);
-
-var data = [{
-  values: {{v}},
-  labels: {{k|safe}},
-  type: 'pie'
-}];
-
-var layout = {
-  height: 400,
-  width: 500};
-
-Plotly.newPlot('myDiv1', data, layout);
+console.log(data);
+var layout={
+  height: 700};
+Plotly.newPlot('myDiv', data,layout);
 
 
 </script>
