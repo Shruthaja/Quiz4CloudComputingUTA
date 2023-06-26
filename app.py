@@ -1,4 +1,5 @@
 import time
+
 import pyodbc
 import redis
 from flask import Flask
@@ -154,18 +155,19 @@ def page23():
             redis_time.append(e - s)
     return render_template("page2.html", result=query_time, r=time_query, redis_time=redis_time)
 
+
 @app.route('/page3.html', methods=['GET', 'POST'])
 def page3():
-    value=""
-    key=""
+    value = ""
+    key = ""
     d = {}
-    if request.method=="POST":
-        s=request.form['string']
+    if request.method == "POST":
+        s = request.form['string']
         for i in set(s):
-            d[i]=0
+            d[i] = 0
         for i in s:
-            d[i]=d[i]+1
-    return render_template("page3.html",v=list(d.values()),k=list(d.keys()))
+            d[i] = d[i] + 1
+    return render_template("page3.html", v=list(d.values()), k=list(d.keys()))
 
 
 if __name__ == '__main__':
