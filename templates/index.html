@@ -46,18 +46,15 @@ var data = [{
   y: {{result}},  mode: 'lines+markers',
 
   name:'Db',
-  type: 'bar'
-},{
+  type: 'bar'},{
  x: {{r}},
   y: {{redis_time}},  mode: 'lines+markers',
 
   name: 'Redis',
-  type: 'bar'
-}];
+  type: 'bar'}];
 console.log(data);
 var layout = {
-  title: '1000 Random Tuples vs Time Taken To Fetch',barmode:'group'
-};
+  title: '1000 Random Tuples vs Time Taken To Fetch'};
 
 
 Plotly.newPlot('myDiv',data,layout);

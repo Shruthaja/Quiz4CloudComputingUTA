@@ -37,25 +37,29 @@
 <script>
 var data = [
   {
-    x: {{k|safe}},
-    y: {{v}},
+    y: {{k|safe}},
+     transforms: [{
+    type: 'sort',
+    target: 'x',
+    order: 'ascending'
+  }],
+    x: {{v}},
     type: 'bar',
-    orientation:'v'
+    orientation:'h',
   }
 ];
 
 Plotly.newPlot('myDiv', data);
 
 var data = [{
-  values: {{v}},
-  labels: {{k|safe}},
+  labels: {{v}},
+  values: {{k|safe}},
   type: 'pie'
 }];
 
 var layout = {
   height: 400,
-  width: 500
-};
+  width: 500};
 
 Plotly.newPlot('myDiv1', data, layout);
 
