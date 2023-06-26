@@ -28,48 +28,25 @@ def hello_world():
     d = {}
     if request.method == "POST":
         s = request.form['abc']
-        for i in set(s):
-            d[i] = 0
+        s=s.split()
+        print(s[0][1])
         for i in s:
-            d[i] = d[i] + 1
+            d[i[0]]=int(i[1])
     return render_template("index.html", result=list(d.values()), r=list(d.keys()))
 
 
 @app.route('/page2.html', methods=['GET', 'POST'])
 def page2():
-    query_time = []
-    time_query = []
-    result = []
-    redis_time = []
+    value = ""
+    key = ""
+    d = {}
     if request.method == "POST":
-        minlat = request.form['lat']
-        minlon = request.form['lon']
-        maxlat = request.form['mlat']
-        maxlon = request.form['mlon']
-        query = "select top(1000) * from dbo.earthquake where latitude between ? and ? and longitude between ? and ?"
-        cursor.execute(query, minlat, maxlat, minlon, maxlon)
-        temp = cursor.fetchall()
-        temp_result = ""
-        for j in temp:
-            temp_result = temp_result + str(j)
-        red.set(2, temp_result)
-        time_query = []
-        redis_time = []
-        time_query = []
-        for i in range(30):
-            time_query.append(i + 1)
-        query_time = []
-        for i in time_query:
-            start = time.time()
-            cursor.execute(query, minlat, maxlat, minlon, maxlon)
-            end = time.time()
-            diff = end - start
-            query_time.append(diff)
-            s = time.time()
-            temp = red.get(2)
-            e = time.time()
-            redis_time.append(e - s)
-    return render_template("page2.html", result=query_time, r=time_query, redis_time=redis_time)
+        s = request.form['abc']
+        s=s.split(',')
+        for i in s:
+            i=i.split()
+            d[i[0]] = i[1]
+    return render_template("page2.html", result=list(d.values()), r=list(d.keys()))
 
 
 @app.route('/page22.html', methods=['GET', 'POST'])
