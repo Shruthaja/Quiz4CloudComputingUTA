@@ -26,6 +26,7 @@
 
     </form>
     <div style="margin-top:3%;" id='myDiv'>
+            <div style="margin-top:3%;" id='myDiv1'>
 
     </div>
 
@@ -49,7 +50,29 @@ console.log(data);
 var layout = {
   title: '1000 Random Tuples vs Time Taken To Fetch',barmode:'group'
 };
+
+
 Plotly.newPlot('myDiv',data,layout);
+var data = [{
+  x: {{r}},
+  y: {{result}},  mode: 'lines+markers',
+
+  name:'Db',
+  type: 'scatter'
+},{
+ x: {{r}},
+  y: {{redis_time}},  mode: 'lines+markers',
+
+  name: 'Redis',
+  type: 'scatter'
+}];
+console.log(data);
+var layout = {
+  title: '1000 Random Tuples vs Time Taken To Fetch',barmode:'group'
+};
+Plotly.newPlot('myDiv1',data,layout);
+
+
 
 
 
