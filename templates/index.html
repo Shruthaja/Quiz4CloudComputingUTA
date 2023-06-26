@@ -26,6 +26,7 @@
 <div style="margin-top:3%;">
     <form action="/" method="post">
 <input type="text" name="abc" placeholder="Enter the String">
+
         <input type="submit">
     </form>
     </div>
@@ -36,7 +37,7 @@
 
 <script>
 var data = [{
-  values: {{result}},
+  values: {{result|safe}},
   labels: {{r|safe}},
    textinfo: "label+percent",
   type: 'pie'

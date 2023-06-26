@@ -28,10 +28,9 @@ def hello_world():
     d = {}
     if request.method == "POST":
         s = request.form['abc']
-        s=s.split()
-        print(s[0][1])
+        s=s.split(",")
         for i in s:
-            d[i[0]]=int(i[1])
+            d[i[0]]=i[2:]
     return render_template("index.html", result=list(d.values()), r=list(d.keys()))
 
 
@@ -49,70 +48,10 @@ def page2():
     return render_template("page2.html", result=list(d.values()), r=list(d.keys()))
 
 
-@app.route('/page22.html', methods=['GET', 'POST'])
-def page22():
-    query_time = []
-    time_query = []
-    result = []
-    redis_time = []
-    if request.method == "POST":
-        smag = request.form['smag']
-        emag = request.form['emag']
-        query = "select top(1000) * from dbo.earthquake where mag between ? and ? ;"
-        cursor.execute(query, smag, emag)
-        temp = cursor.fetchall()
-        temp_result = ""
-        for j in temp:
-            temp_result = temp_result + str(j)
-        red.set(3, temp_result)
-        for i in range(30):
-            time_query.append(i + 1)
-        query_time = []
-        for i in time_query:
-            start = time.time()
-            cursor.execute(query, smag, emag)
-            end = time.time()
-            diff = end - start
-            query_time.append(diff)
-            s = time.time()
-            red.get(3)
-            e = time.time()
-            redis_time.append(e - s)
-    return render_template("page2.html", result=query_time, r=time_query, redis_time=redis_time)
 
 
-@app.route('/page23.html', methods=['GET', 'POST'])
-def page23():
-    query_time = []
-    time_query = []
-    result = []
-    redis_time = []
-    if request.method == "POST":
-        lat = request.form['lat1']
-        long = request.form['lon1']
-        ran = request.form['range']
-        query = "select top(1000) * from dbo.earthquake  WHERE ( 6371 * ACOS(COS(RADIANS(latitude)) * COS(RADIANS(?)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(latitude)) * SIN(RADIANS(?)) ))< ?;"
-        cursor.execute(query, lat, long, lat, ran)
-        temp = cursor.fetchall()
-        temp_result = ""
-        for j in temp:
-            temp_result = temp_result + str(j)
-        red.set(4, temp_result)
-        time_query = []
-        for i in range(30):
-            time_query.append(i + 1)
-        query_time = []
-        for i in time_query:
-            start = time.time()
-            cursor.execute(query, lat, long, lat, ran)
-            end = time.time()
-            diff = end - start
-            query_time.append(diff)
-            s = time.time()
-            red.get(4)
-            e = time.time()
-            redis_time.append(e - s)
-    return render_template("page2.html", result=query_time, r=time_query, redis_time=redis_time)
+
+
 
 
 @app.route('/page3.html', methods=['GET', 'POST'])
