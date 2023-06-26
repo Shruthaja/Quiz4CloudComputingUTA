@@ -7,20 +7,6 @@ from flask import render_template
 from flask import request
 
 app = Flask(__name__)
-server = 'assignmentservershruthaja.database.windows.net'
-database = 'assignemnt3'
-username = 'shruthaja'
-password = 'mattu4-12'
-driver = '{ODBC Driver 17 for SQL Server}'
-
-conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}')
-cursor = conn.cursor()
-
-red = redis.StrictRedis(host='testredisshruthaja.redis.cache.windows.net', port=6379, db=0,
-                        password='4KZj2Wt0qlRAoLaQrQt9urjqOLSfIWMnXAzCaByCwkw=', ssl=False)
-red.flushall()
-
-
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     value = ""
