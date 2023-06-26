@@ -25,87 +25,28 @@
 </div>
 <div style="margin-top:3%;">
     <form action="/" method="post">
-
+<input type="text" name="abc" placeholder="Enter the String">
+        <input type="submit">
     </form>
-    <div style="margin-top:3%;" id='myDiv'>
-    </div>
-    s
-    <div style="margin-top:3%;" id='myDiv1'></div>
-    <div class="row">
-        <div class="col-lg-6" style="margin-top:3%;" id='myDiv2'></div>
-
-        <div class="col-lg-6" style="margin-top:3%;" id='myDiv3'></div>
     </div>
 
+    <div style="margin-top:3%;margin-left:20%" id='myDiv' >
+    </div>
 
-</div>
 
 <script>
 var data = [{
-  x: {{r}},
-  y: {{result}},  mode: 'lines+markers',
-
-  name:'Db',
-  type: 'bar'},{
- x: {{r}},
-  y: {{redis_time}},  mode: 'lines+markers',
-
-  name: 'Redis',
-  type: 'bar'}];
-console.log(data);
-var layout = {
-  title: '1000 Random Tuples vs Time Taken To Fetch'};
-
-
-Plotly.newPlot('myDiv',data,layout);
-var data = [{
-  x: {{r}},
-  y: {{result}},  mode: 'lines+markers',
-
-  name:'Db',
-  type: 'scatter'
-},{
- x: {{r}},
-  y: {{redis_time}},  mode: 'lines+markers',
-
-  name: 'Redis',
-  type: 'scatter'
-}];
-console.log(data);
-var layout = {
-  title: '1000 Random Tuples vs Time Taken To Fetch'
-};
-Plotly.newPlot('myDiv1',data,layout);
-
-var data = [{
   values: {{result}},
   labels: {{r|safe}},
+   textinfo: "label+percent",
   type: 'pie'
 }];
 
 var layout = {
-  height: 400,
-  width: 500
+  height: 750,
+  width: 1200
 };
-Plotly.newPlot('myDiv2',data,layout);
-
-var data = [{
-  values: {{redis_time}},
-  labels: {{r|safe}},
-  type: 'pie'
-}];
-
-var layout = {
-  height: 400,
-  width: 500
-};
-Plotly.newPlot('myDiv3',data,layout);
-
-
-
-
-
-
+Plotly.newPlot('myDiv',data,layout);
 
 </script>
 </body>

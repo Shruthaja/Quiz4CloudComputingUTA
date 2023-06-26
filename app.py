@@ -23,34 +23,16 @@ red.flushall()
 
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
-    query_time = []
-    time_query = []
-    r = ''
-    redis_time = []
-    time_query = []
-    for i in range(30):
-        time_query.append(i + 1)
-    query_time = []
-    query = "SELECT TOP 1000 * FROM [dbo].[earthquake]"
-    cursor.execute(query)
-    temp = cursor.fetchall()
-    temp_result = ""
-    for j in temp:
-        temp_result = temp_result + str(j)
-    red.set(1, temp_result)
-    s = time.time()
-    for i in time_query:
-        start = time.time()
-        cursor.execute(query)
-        end = time.time()
-        diff = end - start
-        query_time.append(diff)
-        s = time.time()
-        red.get(1)
-        e = time.time()
-        redis_time.append(e - s)
-    print(query_time)
-    return render_template("index.html", result=query_time, r=time_query, redis_time=redis_time)
+    value = ""
+    key = ""
+    d = {}
+    if request.method == "POST":
+        s = request.form['abc']
+        for i in set(s):
+            d[i] = 0
+        for i in s:
+            d[i] = d[i] + 1
+    return render_template("index.html", result=list(d.values()), r=list(d.keys()))
 
 
 @app.route('/page2.html', methods=['GET', 'POST'])

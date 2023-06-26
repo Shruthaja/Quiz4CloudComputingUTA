@@ -34,7 +34,27 @@
 </div>
 <div style="margin-top:3%;" id="myDiv1">
 </div>
+<div style="margin-top:3%;" id="myDiv4">
+</div>
 <script>
+
+
+var data=[
+ {
+    y: {{k|safe}},
+     transforms: [{
+    type: 'sort',
+    target: 'x',
+    order: 'ascending'
+  }],
+    x: {{v}},
+    type: 'histogram',
+    orientation:'h',
+  }
+];
+
+Plotly.newPlot('myDiv4', data);
+
 var data = [
   {
     y: {{k|safe}},
@@ -52,8 +72,8 @@ var data = [
 Plotly.newPlot('myDiv', data);
 
 var data = [{
-  labels: {{v}},
-  values: {{k|safe}},
+  values: {{v}},
+  labels: {{k|safe}},
   type: 'pie'
 }];
 
