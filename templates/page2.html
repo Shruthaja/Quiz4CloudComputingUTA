@@ -49,6 +49,8 @@
     <div style="margin-top:3%;" id="myDiv">
 
     </div>
+        <div style="margin-top:3%;" id="myDiv1">
+        </div>
 </div>
     <script>
 var data = [{
@@ -68,8 +70,25 @@ console.log(data);
 var layout = {
   title: '1000 Random Tuples vs Time Taken To Fetch'
 };
-Plotly.newPlot('myDiv',data,layout);
+Plotly.newPlot('myDiv1',data,layout);
+var data = [{
+  x: {{r}},
+  y: {{result}},  mode: 'lines+markers',
 
+  name:'Db',
+  type: 'bar'
+},{
+ x: {{r}},
+  y: {{redis_time}},  mode: 'lines+markers',
+
+  name: 'Redis',
+  type: 'bar'
+}];
+console.log(data);
+var layout = {
+  title: '1000 Random Tuples vs Time Taken To Fetch'
+};
+Plotly.newPlot('myDiv',data,layout);
     </script>
 
 </body>
